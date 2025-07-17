@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dvf7dtbq2g71y"]
+[gd_scene load_steps=6 format=3 uid="uid://dvf7dtbq2g71y"]
 
 [ext_resource type="Texture2D" uid="uid://cd8bd77w6yplc" path="res://asset/alien_attack_assets/textures/bg.png" id="1_v0l8b"]
 [ext_resource type="Texture2D" uid="uid://bpgs8ejx0tcbu" path="res://asset/alien_attack_assets/textures/player_ship.png" id="2_wp4xf"]
 [ext_resource type="PackedScene" uid="uid://nm3mdiegyrnm" path="res://scene/player.tscn" id="3_wp4xf"]
-[ext_resource type="PackedScene" uid="uid://u6m1cd3jly4j" path="res://scene/rocket.tscn" id="4_brvut"]
+[ext_resource type="PackedScene" uid="uid://b0u4751fb6omn" path="res://scene/ennemy.tscn" id="5_0ha60"]
+[ext_resource type="PackedScene" uid="uid://brwxa5vta8xjk" path="res://scene/spawn.tscn" id="5_4j5ol"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -22,5 +23,7 @@ texture = ExtResource("2_wp4xf")
 [node name="Player" parent="." instance=ExtResource("3_wp4xf")]
 position = Vector2(158, 325)
 
-[node name="Rocket" parent="." instance=ExtResource("4_brvut")]
-position = Vector2(222, 325)
+[node name="Ennemy" parent="." instance=ExtResource("5_0ha60")]
+position = Vector2(797, 343)
+
+[node name="EnnemySpawn" parent="." instance=ExtResource("5_4j5ol")]

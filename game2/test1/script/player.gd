@@ -9,7 +9,7 @@ func _ready():
 	#rocket_container = get_node("RocketContainer")
 	pass
 	
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("shoot"):
 		shoot()
 
@@ -21,7 +21,7 @@ func shoot():
 	rocket_instance.global_position = global_position
 	rocket_instance.global_position.x += 50
 	
-func _physics_process(delta):
+func _physics_process(_delta):
 	velocity = Vector2(0,0)
 	
 	if (Input.is_action_pressed("move_right")):
