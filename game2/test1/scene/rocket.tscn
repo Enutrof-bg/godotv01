@@ -10,7 +10,7 @@ height = 120.0
 [node name="Rocket" type="Area2D"]
 scale = Vector2(0.35, 0.35)
 script = ExtResource("1_ncccc")
-speed = 12
+speed = 500
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_j20b5")
@@ -18,3 +18,8 @@ texture = ExtResource("1_j20b5")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_j20b5")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-42.8571, 0)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
