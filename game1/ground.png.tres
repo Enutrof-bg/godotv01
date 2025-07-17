@@ -1,0 +1,4 @@
+[gd_resource type="AtlasTexture" format=3 uid="uid://bum7536lfkngg"]
+
+[resource]
+region = Rect2(32, 32, 128, 128)

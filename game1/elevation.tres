@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://dun0xnmg67014"]
+
+[ext_resource type="Texture2D" uid="uid://dmc7epmd2gyuu" path="res://Tiny Swords (Update 010)/Terrain/Ground/Tilemap_Elevation.png" id="1_fffq1"]
+
+[resource]
+atlas = ExtResource("1_fffq1")
+region = Rect2(32, 32, 128, 128)

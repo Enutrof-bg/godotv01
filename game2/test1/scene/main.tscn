@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://dvf7dtbq2g71y"]
+
+[ext_resource type="Texture2D" uid="uid://cd8bd77w6yplc" path="res://asset/alien_attack_assets/textures/bg.png" id="1_v0l8b"]
+[ext_resource type="Texture2D" uid="uid://bpgs8ejx0tcbu" path="res://asset/alien_attack_assets/textures/player_ship.png" id="2_wp4xf"]
+[ext_resource type="PackedScene" uid="uid://nm3mdiegyrnm" path="res://scene/player.tscn" id="3_wp4xf"]
+[ext_resource type="PackedScene" uid="uid://u6m1cd3jly4j" path="res://scene/rocket.tscn" id="4_brvut"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1280.0
+offset_bottom = 720.0
+texture = ExtResource("1_v0l8b")
+stretch_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(211, 235)
+scale = Vector2(0.414545, 0.42233)
+texture = ExtResource("2_wp4xf")
+
+[node name="Player" parent="." instance=ExtResource("3_wp4xf")]
+position = Vector2(158, 325)
+
+[node name="Rocket" parent="." instance=ExtResource("4_brvut")]
+position = Vector2(222, 325)

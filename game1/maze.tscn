@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://rvps47q0v3by"]
+
+[ext_resource type="Texture2D" uid="uid://dun0xnmg67014" path="res://elevation.tres" id="1_dj01w"]
+[ext_resource type="Texture2D" uid="uid://bj6md78crwmxc" path="res://icon.svg" id="1_h41xc"]
+
+[node name="Area2D" type="Area2D"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(75, 99)
+polygon = PackedVector2Array(-69, 4, -72, 88, -32, 205, 389, 164, 372, -29, 274, -114, 265, 32, 337, 80, 331, 125, 179, 135, 46, 151, 2, 78, 107, 32, 89, -81, -45, -107)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(74, 99)
+texture = ExtResource("1_h41xc")
+polygon = PackedVector2Array(-115, 1, -72, 88, -32, 205, 389, 164, 372, -29, 274, -114, 265, 32, 285, 80, 241, 111, 179, 135, 159, 107, 140, 76, 128, 25, 89, -81, -45, -107)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+offset_right = 373.0
+offset_bottom = 284.0
+texture = ExtResource("1_dj01w")
+stretch_mode = 2
