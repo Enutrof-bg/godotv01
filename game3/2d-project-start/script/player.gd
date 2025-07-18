@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 signal dead
+signal test
 var health = 100.0
 
 func _physics_process(delta):
@@ -19,3 +20,8 @@ func _physics_process(delta):
 		%ProgressBar.value = health
 		if health <= 0.0:
 			dead.emit()
+
+
+func _on_dead() -> void:
+	%end.visible = true # Replace with function body.
+	get_tree().paused = true # Replace with function body.

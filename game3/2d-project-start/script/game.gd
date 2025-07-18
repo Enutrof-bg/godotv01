@@ -12,8 +12,9 @@ func spawn():
 
 func _on_timer_timeout() -> void:
 	spawn() # Replace with function body.
-	spawn()
-	spawn()
+	#spawn()
+	#spawn()
+	#pass
 
 
 func _on_player_dead() -> void:

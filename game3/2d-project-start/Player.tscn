@@ -57,3 +57,5 @@ theme_override_styles/background = SubResource("StyleBoxFlat_e80uo")
 theme_override_styles/fill = SubResource("StyleBoxFlat_kne1u")
 value = 100.0
 show_percentage = false
+
+[connection signal="dead" from="." to="." method="_on_dead"]

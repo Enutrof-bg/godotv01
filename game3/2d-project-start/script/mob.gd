@@ -10,6 +10,7 @@ func _ready():
 	
 func _physics_process(delta):
 	var direction = global_position.direction_to(player.global_position)
+#a	print(directiona)
 	velocity = direction * 150
 	move_and_slide()
 
