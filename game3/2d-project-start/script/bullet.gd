@@ -16,5 +16,12 @@ func _physics_process(delta):
 func _on_body_entered(body):
 	queue_free()
 	if body.has_method("take_damage"):
-		body.take_damage()
+		body.take_damage(2)
 	#pass # Replace with function body.
+
+
+func _on_body_entered_ss2(body):
+	queue_free()
+	if body.has_method("take_damage"):
+		body.take_damage(1)
+		 # Replace with function body.

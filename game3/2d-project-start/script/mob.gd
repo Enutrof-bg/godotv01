@@ -1,25 +1,32 @@
 extends CharacterBody2D
 
-var health = 3
+var health = randi_range(3, 10)
+
 
 @onready var player = get_node("/root/Game/Player")
 
 func _ready():
 	player = get_node("/root/Game/Player")
-	%Slime.play_walk()
-	
+	#%Slime.play_walk()
+	%hp.text = str(health)
+
+func process():
+	#%hp.text = "HP : %s" %health
+	pass
+
 func _physics_process(delta):
 	var direction = global_position.direction_to(player.global_position)
-#a	print(directiona)
+#a	print(direction)
 	velocity = direction * 150
 	move_and_slide()
 
 
-func take_damage():
-	health -= 1
-	%Slime.play_hurt()
+func take_damage(damage):
+	health -= damage
+	%hp.text = str(health)
+	#%Slime.play_hurt()
 	
-	if health == 0:
+	if health <= 0:
 		queue_free()
 		const smoke_scene = preload("res://smoke_explosion/smoke_explosion.tscn")
 		var smoke = smoke_scene.instantiate()

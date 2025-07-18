@@ -4,7 +4,8 @@ res://tree.tscn
 res://mob.tscn
 res://gun.tscn
 res://bullet.tscn
-res://script/player.gd
-res://script/mob.gd
-res://script/game.gd
 res://characters/slime/slime.tscn
+res://script/pistol.gd
+res://script/mob.gd
+res://bullet2.tscn
+res://script/bullet.gd
