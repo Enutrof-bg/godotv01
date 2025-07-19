@@ -1,12 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://cmaoij711cij"]
+[gd_scene load_steps=5 format=3 uid="uid://cmaoij711cij"]
 
 [ext_resource type="PackedScene" uid="uid://ogik4s70pgwl" path="res://characters/slime/slime.tscn" id="1_dy6sc"]
 [ext_resource type="Script" uid="uid://uxdrmxj0gm10" path="res://script/mob.gd" id="1_nokgg"]
+[ext_resource type="PackedScene" uid="uid://bhxkhp3517py7" path="res://gunmob.tscn" id="3_ubaqv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nokgg"]
-radius = 48.0
+radius = 61.0082
 
-[node name="Mob" type="CharacterBody2D"]
+[node name="Mob" type="CharacterBody2D" groups=["mob"]]
 collision_layer = 2
 script = ExtResource("1_nokgg")
 
@@ -14,7 +15,7 @@ script = ExtResource("1_nokgg")
 unique_name_in_owner = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -24)
+position = Vector2(0, -29)
 shape = SubResource("CircleShape2D_nokgg")
 
 [node name="hp" type="Label" parent="."]
@@ -26,3 +27,14 @@ offset_bottom = -38.0
 theme_override_colors/font_color = Color(0.796078, 0, 0, 1)
 text = "1"
 horizontal_alignment = 1
+
+[node name="shootpoint" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-1, 47)
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="Gun" parent="." instance=ExtResource("3_ubaqv")]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

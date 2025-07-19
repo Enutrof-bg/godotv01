@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bsfajax621p1a"]
+[gd_scene load_steps=7 format=3 uid="uid://bsfajax621p1a"]
 
 [ext_resource type="PackedScene" uid="uid://b8l0mml01oa2h" path="res://Player.tscn" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://cd1cd7732p4gw" path="res://script/game.gd" id="1_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://xxbdowmjbwkq" path="res://tree.tscn" id="2_e2o6t"]
+[ext_resource type="Script" uid="uid://c6ul0jcbfpdqp" path="res://mob_manager.gd" id="3_7jktm"]
 [ext_resource type="PackedScene" uid="uid://cmaoij711cij" path="res://mob.tscn" id="3_feb5d"]
 
 [sub_resource type="Curve2D" id="Curve2D_7jktm"]
@@ -15,53 +16,51 @@ point_count = 5
 y_sort_enabled = true
 script = ExtResource("1_fc0e3")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = -100
+[node name="ENTITIES" type="Node" parent="."]
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-z_index = -100
-offset_right = 1920.0
-offset_bottom = 1080.0
-color = Color(0.654729, 0.974372, 0.649644, 1)
-
-[node name="Player" parent="." instance=ExtResource("1_80nbo")]
+[node name="Player" parent="ENTITIES" groups=["player"] instance=ExtResource("1_80nbo")]
 position = Vector2(976, 520)
 
-[node name="Path2D" type="Path2D" parent="Player"]
+[node name="Path2D" type="Path2D" parent="ENTITIES/Player"]
 position = Vector2(-976, -520)
 curve = SubResource("Curve2D_7jktm")
 
-[node name="PathFollow2D" type="PathFollow2D" parent="Player/Path2D"]
+[node name="PathFollow2D" type="PathFollow2D" parent="ENTITIES/Player/Path2D"]
 unique_name_in_owner = true
 position = Vector2(-128, -168)
 rotation = 0.00367645
 
-[node name="Tree" parent="." instance=ExtResource("2_e2o6t")]
-position = Vector2(216, 160)
+[node name="MOB_MANAGER" type="Node" parent="ENTITIES"]
+script = ExtResource("3_7jktm")
 
-[node name="Tree2" parent="." instance=ExtResource("2_e2o6t")]
-position = Vector2(440, 512)
-
-[node name="Tree3" parent="." instance=ExtResource("2_e2o6t")]
-position = Vector2(1280, 704)
-
-[node name="Tree4" parent="." instance=ExtResource("2_e2o6t")]
-position = Vector2(1536, 344)
-
-[node name="Tree5" parent="." instance=ExtResource("2_e2o6t")]
-position = Vector2(1104, 288)
-
-[node name="Tree6" parent="." instance=ExtResource("2_e2o6t")]
-position = Vector2(544, 824)
-
-[node name="Tree7" parent="." instance=ExtResource("2_e2o6t")]
-position = Vector2(1736, 848)
-
-[node name="Mob" parent="." instance=ExtResource("3_feb5d")]
+[node name="Mob" parent="ENTITIES/MOB_MANAGER" instance=ExtResource("3_feb5d")]
 position = Vector2(432, 184)
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="ENTITIES/MOB_MANAGER"]
 autostart = true
+
+[node name="Trees" type="Node2D" parent="."]
+
+[node name="Tree" parent="Trees" instance=ExtResource("2_e2o6t")]
+position = Vector2(216, 160)
+
+[node name="Tree2" parent="Trees" instance=ExtResource("2_e2o6t")]
+position = Vector2(440, 512)
+
+[node name="Tree3" parent="Trees" instance=ExtResource("2_e2o6t")]
+position = Vector2(1280, 704)
+
+[node name="Tree4" parent="Trees" instance=ExtResource("2_e2o6t")]
+position = Vector2(1536, 344)
+
+[node name="Tree5" parent="Trees" instance=ExtResource("2_e2o6t")]
+position = Vector2(1104, 288)
+
+[node name="Tree6" parent="Trees" instance=ExtResource("2_e2o6t")]
+position = Vector2(544, 824)
+
+[node name="Tree7" parent="Trees" instance=ExtResource("2_e2o6t")]
+position = Vector2(1736, 848)
 
 [node name="end" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
@@ -91,5 +90,14 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 100
 text = "Game Over"
 
-[connection signal="dead" from="Player" to="." method="_on_player_dead"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -100
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+z_index = -100
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0.654729, 0.974372, 0.649644, 1)
+
+[connection signal="dead" from="ENTITIES/Player" to="." method="_on_player_dead"]
+[connection signal="timeout" from="ENTITIES/MOB_MANAGER/Timer" to="ENTITIES/MOB_MANAGER" method="_on_timer_timeout"]

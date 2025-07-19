@@ -7,8 +7,8 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_kpjcp"]
 radius = 27.4591
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_kne1u"]
-radius = 48.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kne1u"]
+size = Vector2(80, 104)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e80uo"]
 corner_radius_top_left = 8
@@ -44,8 +44,9 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
-position = Vector2(-2, -43)
-shape = SubResource("CircleShape2D_kne1u")
+position = Vector2(0, -44)
+shape = SubResource("RectangleShape2D_kne1u")
+debug_color = Color(1, 0, 0.0898189, 0.42)
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 unique_name_in_owner = true
@@ -57,5 +58,3 @@ theme_override_styles/background = SubResource("StyleBoxFlat_e80uo")
 theme_override_styles/fill = SubResource("StyleBoxFlat_kne1u")
 value = 100.0
 show_percentage = false
-
-[connection signal="dead" from="." to="." method="_on_dead"]
