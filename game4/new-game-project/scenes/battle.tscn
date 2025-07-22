@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://c0rbmeck13a0s"]
+[gd_scene load_steps=4 format=3 uid="uid://c0rbmeck13a0s"]
 
 [ext_resource type="Texture2D" uid="uid://cp4iq5fd6j8be" path="res://art/background.png" id="1_dn72j"]
+[ext_resource type="PackedScene" uid="uid://bk34ifbtfmsui" path="res://scenes/CARD_UI/card_ui.tscn" id="2_th188"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p1qf1"]
+size = Vector2(256, 100)
 
 [node name="Battle" type="Node2D"]
 metadata/_edit_lock_ = true
@@ -10,3 +14,33 @@ modulate = Color(0.67069, 0.67069, 0.67069, 1)
 texture = ExtResource("1_dn72j")
 centered = false
 metadata/_edit_lock_ = true
+
+[node name="CardDropArea" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CardDropArea"]
+position = Vector2(128, 50)
+shape = SubResource("RectangleShape2D_p1qf1")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Hand" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -75.0
+offset_top = -30.0
+offset_right = 75.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="CardUI" parent="CanvasLayer/Hand" instance=ExtResource("2_th188")]
+layout_mode = 2
+
+[node name="CardUI2" parent="CanvasLayer/Hand" instance=ExtResource("2_th188")]
+layout_mode = 2
+
+[node name="CardUI3" parent="CanvasLayer/Hand" instance=ExtResource("2_th188")]
+layout_mode = 2

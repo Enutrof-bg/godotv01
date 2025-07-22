@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://bk34ifbtfmsui"]
+
+[ext_resource type="Theme" uid="uid://tv4f1ymagry0" path="res://main_theme.tres" id="1_5x102"]
+[ext_resource type="Script" uid="uid://cj2uqhgxatu7y" path="res://scenes/CARD_UI/card_ui.gd" id="2_e1hm3"]
+[ext_resource type="Script" uid="uid://clevuhj7ti4os" path="res://scenes/CARD_UI/card_state_machine.gd" id="3_ky7se"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5x102"]
+size = Vector2(25, 30)
+
+[node name="CardUI" type="Control"]
+custom_minimum_size = Vector2(25, 30)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -231.0
+offset_bottom = -114.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_5x102")
+script = ExtResource("2_e1hm3")
+
+[node name="Color" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.41816, 0.730815, 0.577764, 1)
+
+[node name="State" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "state"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DropPoint" type="Area2D" parent="."]
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DropPoint"]
+position = Vector2(12.5, 15)
+shape = SubResource("RectangleShape2D_5x102")
+
+[node name="CardStateMachine" type="Node" parent="."]
+script = ExtResource("3_ky7se")
