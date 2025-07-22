@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5cfukklmjbsg"]
+
+[ext_resource type="Script" uid="uid://cjl24vykccjme" path="res://SCRIPT/bullet.gd" id="1_oqteu"]
+[ext_resource type="Texture2D" uid="uid://dftkbqwsfd68r" path="res://ASSETS/pistol/projectile.png" id="2_rt4ua"]
+[ext_resource type="LabelSettings" uid="uid://c2afp8nogt41j" path="res://RESSOURCES/bullet_mob.tres" id="3_rt4ua"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v7oki"]
+radius = 17.0
+
+[node name="Bullet" type="Area2D"]
+top_level = true
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("1_oqteu")
+
+[node name="Projectile" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_rt4ua")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(11, 1)
+shape = SubResource("CircleShape2D_v7oki")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(11, 1)
+
+[node name="Label" type="Label" parent="."]
+offset_left = -10.0
+offset_top = -26.0
+offset_right = 30.0
+offset_bottom = 28.0
+text = "-1"
+label_settings = ExtResource("3_rt4ua")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

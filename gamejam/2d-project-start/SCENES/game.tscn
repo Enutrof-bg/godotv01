@@ -1,0 +1,109 @@
+[gd_scene load_steps=10 format=3 uid="uid://bsfajax621p1a"]
+
+[ext_resource type="PackedScene" uid="uid://b8l0mml01oa2h" path="res://SCENES/Player.tscn" id="1_80nbo"]
+[ext_resource type="Script" uid="uid://cd1cd7732p4gw" path="res://SCRIPT/game.gd" id="1_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://bdac3vypjom40" path="res://SCENES/camera.tscn" id="2_5m27e"]
+[ext_resource type="Script" uid="uid://c6ul0jcbfpdqp" path="res://SCRIPT/mob_manager.gd" id="3_7jktm"]
+
+[sub_resource type="Curve2D" id="Curve2D_7jktm"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -128, -168, 0, 0, 0, 0, 2048, -160, 0, 0, 0, 0, 2040, 1144, 0, 0, 0, 0, -120, 1160, 0, 0, 0, 0, -128, -168)
+}
+point_count = 5
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_5m27e"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ltfqq"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ggca4"]
+normal = Vector2(-1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_5j11q"]
+normal = Vector2(1, 0)
+
+[node name="Game" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_fc0e3")
+
+[node name="Camera2D" parent="." instance=ExtResource("2_5m27e")]
+
+[node name="ENTITIES" type="Node" parent="."]
+
+[node name="Player" parent="ENTITIES" groups=["player"] instance=ExtResource("1_80nbo")]
+position = Vector2(976, 520)
+
+[node name="Path2D" type="Path2D" parent="ENTITIES/Player"]
+position = Vector2(-976, -520)
+curve = SubResource("Curve2D_7jktm")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="ENTITIES/Player/Path2D"]
+unique_name_in_owner = true
+position = Vector2(-128, -168)
+rotation = 0.00367645
+
+[node name="MOB_MANAGER" type="Node" parent="ENTITIES"]
+script = ExtResource("3_7jktm")
+
+[node name="Timer" type="Timer" parent="ENTITIES/MOB_MANAGER"]
+autostart = true
+
+[node name="Stage" type="Node" parent="."]
+
+[node name="BackgroundColor" type="CanvasLayer" parent="Stage"]
+layer = -100
+
+[node name="ColorRect" type="ColorRect" parent="Stage/BackgroundColor"]
+z_index = -100
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0.925836, 0.812889, 0.85635, 1)
+
+[node name="Limits" type="StaticBody2D" parent="Stage"]
+
+[node name="up" type="CollisionShape2D" parent="Stage/Limits"]
+position = Vector2(-960, -540)
+shape = SubResource("WorldBoundaryShape2D_5m27e")
+
+[node name="down" type="CollisionShape2D" parent="Stage/Limits"]
+position = Vector2(2880, 1620)
+shape = SubResource("WorldBoundaryShape2D_ltfqq")
+
+[node name="right" type="CollisionShape2D" parent="Stage/Limits"]
+position = Vector2(2880, 1620)
+shape = SubResource("WorldBoundaryShape2D_ggca4")
+
+[node name="left" type="CollisionShape2D" parent="Stage/Limits"]
+position = Vector2(-960, -540)
+shape = SubResource("WorldBoundaryShape2D_5j11q")
+
+[node name="end" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="end"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.737255)
+
+[node name="Label" type="Label" parent="end/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 100
+text = "Game Over"
+
+[connection signal="dead" from="ENTITIES/Player" to="." method="_on_player_dead"]
+[connection signal="timeout" from="ENTITIES/MOB_MANAGER/Timer" to="ENTITIES/MOB_MANAGER" method="_on_timer_timeout"]

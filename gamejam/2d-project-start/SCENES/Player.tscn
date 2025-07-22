@@ -1,0 +1,89 @@
+[gd_scene load_steps=11 format=3 uid="uid://b8l0mml01oa2h"]
+
+[ext_resource type="Script" uid="uid://3apqb240ypti" path="res://SCRIPT/player.gd" id="1_kpjcp"]
+[ext_resource type="PackedScene" uid="uid://pbmyh1qru7p" path="res://ASSETS/characters/happy_boo/happy_boo.tscn" id="1_xhfnw"]
+[ext_resource type="PackedScene" uid="uid://c0v2pymjqfjbk" path="res://SCENES/gun.tscn" id="3_kne1u"]
+[ext_resource type="FontFile" uid="uid://lo5gtra0x411" path="res://ASSETS/FONTS/HWYGWDE.TTF" id="4_5p5y6"]
+[ext_resource type="Texture2D" uid="uid://b7rhtttevhxtj" path="res://ASSETS/characters/ground_shadow.png" id="5_2awq0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kpjcp"]
+radius = 27.4591
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kne1u"]
+size = Vector2(80, 104)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e80uo"]
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kne1u"]
+bg_color = Color(0.434392, 0.775898, 0.461538, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_4cgft"]
+font = ExtResource("4_5p5y6")
+font_size = 128
+shadow_color = Color(0.552956, 0.552956, 0.552956, 1)
+shadow_offset = Vector2(2, -4)
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 3
+script = ExtResource("1_kpjcp")
+
+[node name="HappyBoo" parent="." instance=ExtResource("1_xhfnw")]
+unique_name_in_owner = true
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -9)
+shape = SubResource("CircleShape2D_kpjcp")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+enabled = false
+
+[node name="Gun" parent="." instance=ExtResource("3_kne1u")]
+position = Vector2(0, -48)
+
+[node name="hitbox" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(0, -44)
+shape = SubResource("RectangleShape2D_kne1u")
+debug_color = Color(1, 0, 0.0898189, 0.42)
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+offset_left = -56.0
+offset_top = -120.0
+offset_right = 58.0
+offset_bottom = -101.0
+theme_override_styles/background = SubResource("StyleBoxFlat_e80uo")
+theme_override_styles/fill = SubResource("StyleBoxFlat_kne1u")
+value = 100.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="."]
+offset_left = -45.0
+offset_top = -116.0
+offset_right = 35.0
+offset_bottom = 27.0
+text = "3"
+label_settings = SubResource("LabelSettings_4cgft")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GroundShadow" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.188235)
+z_index = -1
+z_as_relative = false
+position = Vector2(1, -5)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("5_2awq0")
