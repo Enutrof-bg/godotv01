@@ -1,4 +1,10 @@
+class_name  MobUI
 extends CharacterBody2D
+
+signal reparent_requested(which_mob_ui: MobUI)
+@onready var color: ColorRect = $Color
+@onready var mob_state_machine: MobStateMachine = $MobStateMachine
+
 
 var health = randi_range(3, 10)
 #var health = 5
@@ -53,7 +59,7 @@ func _physics_process(_delta):
 						#%charge.start()
 					
 			WANDER:
-				print("wander")
+				#print("wander")
 				velocity += direction * 800
 				move_and_slide()
 				#if ((target_position - start_position).length < 4):
@@ -63,14 +69,20 @@ func _physics_process(_delta):
 	else:
 		move_and_slide()
 	#look_at(global_position)
-	
+
+func state_mode() ->void:
+	mob_state_machine.state_mode()	
 
 func take_damage(damage):
 	Sigbus.cam_shake.emit()
 	health -= damage
 	%hp.text = str(health)
+	#state_mode()
+	print("1233")
+	mob_state_machine.state_mode()	
+	print("1233")
 	#%Slime.play_hurt()
-	
+	#mob_state_machine.state_mode()
 	if health <= 0:
 		var smoke = smoke_scene.instantiate()
 		get_parent().add_child(smoke)
@@ -85,7 +97,8 @@ func take_damage(damage):
 	#%shootpoint.add_child(newBullet)
 
 func _on_timer_timeout():
-	print("shoot")
+	#print("shoot")
+	pass
 	#shoot() # Replace with function body.
 
 

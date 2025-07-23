@@ -1,10 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://cmaoij711cij"]
+[gd_scene load_steps=12 format=3 uid="uid://cmaoij711cij"]
 
 [ext_resource type="PackedScene" uid="uid://ogik4s70pgwl" path="res://ASSETS/characters/slime/slime.tscn" id="1_dy6sc"]
 [ext_resource type="Script" uid="uid://uxdrmxj0gm10" path="res://SCRIPT/mob.gd" id="1_nokgg"]
 [ext_resource type="FontFile" uid="uid://lo5gtra0x411" path="res://ASSETS/FONTS/HWYGWDE.TTF" id="3_a86ks"]
 [ext_resource type="PackedScene" uid="uid://bhxkhp3517py7" path="res://SCENES/gunmob.tscn" id="3_ubaqv"]
 [ext_resource type="Texture2D" uid="uid://b7rhtttevhxtj" path="res://ASSETS/characters/ground_shadow.png" id="5_0canq"]
+[ext_resource type="Script" uid="uid://b1guyf1jw02m1" path="res://STATE/mob_state_machine.gd" id="6_rauf3"]
+[ext_resource type="Script" uid="uid://cndvdyn5bsqv" path="res://STATE/mode_1.gd" id="7_khnm2"]
+[ext_resource type="Script" uid="uid://da3q72jq4i175" path="res://STATE/mode_2.gd" id="8_e6f8h"]
+[ext_resource type="Script" uid="uid://bb44ad2yiq04d" path="res://STATE/mode_3.gd" id="9_ly1cm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nokgg"]
 radius = 61.0082
@@ -64,6 +68,25 @@ texture = ExtResource("5_0canq")
 unique_name_in_owner = true
 wait_time = 3.0
 autostart = true
+
+[node name="Color" type="ColorRect" parent="."]
+offset_left = 63.0
+offset_top = -90.0
+offset_right = 103.0
+offset_bottom = -50.0
+
+[node name="MobStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("6_rauf3")
+initial_state = NodePath("Mode1")
+
+[node name="Mode1" type="Node" parent="MobStateMachine"]
+script = ExtResource("7_khnm2")
+
+[node name="Mode2" type="Node" parent="MobStateMachine"]
+script = ExtResource("8_e6f8h")
+
+[node name="Mode3" type="Node" parent="MobStateMachine"]
+script = ExtResource("9_ly1cm")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="charge" to="." method="_on_charge_timeout"]

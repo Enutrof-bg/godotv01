@@ -10,7 +10,7 @@ var direction : Vector2
 const bullet_target := "mob"
 
 func _physics_process(delta):
-	print("POSITION = ", global_position)
+	#print("POSITION = ", global_position)
 	move(delta)
 	animate()
 	#check_hit(delta)
