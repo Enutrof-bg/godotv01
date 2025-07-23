@@ -54,8 +54,8 @@ func _physics_process(_delta):
 				#else:
 					start_position = player.global_position
 					target_position = player.global_position
-					#if (%charge.time_left == 0):
-					state = WANDER
+					if (%charge.time_left == 0):
+						state = WANDER
 						#%charge.start()
 					
 			WANDER:
@@ -63,9 +63,9 @@ func _physics_process(_delta):
 				velocity += direction * 800
 				move_and_slide()
 				#if ((target_position - start_position).length < 4):
-				if (%charge.time_left == 0):
-					state = IDLE
-					%charge.start()
+				#if (%charge.time_left == 0):
+				state = IDLE
+				%charge.start()
 	else:
 		move_and_slide()
 	#look_at(global_position)
